@@ -6,15 +6,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import rootReducer from './modules';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
-  <React.StrictMode>
+  <>
+    {/* <React.StrictMode> */}
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>,
+    {/* </React.StrictMode> */}
+  </>,
   document.getElementById('root'),
 );
 
