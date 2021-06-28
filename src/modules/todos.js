@@ -10,10 +10,12 @@ export const changeInput = (input) => ({
 
 let id = 3;
 export const insert = (text) => ({
-  id: id++,
   type: INSERT,
-  text,
-  done: false,
+  todo: {
+    id: id++,
+    text,
+    done: false,
+  },
 });
 
 export const toggle = (id) => ({
@@ -49,11 +51,17 @@ const todos = (state = initialState, action) => {
     case INSERT:
       return { ...state, todos: state.todos.concat(action.todo) };
     case TOGGLE:
-      return state.todos.map((todo) =>
-        todo !== action.todo ? todo : { ...todo, done: !todo.done },
-      );
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id !== action.id ? todo : { ...todo, done: !todo.done },
+        ),
+      };
     case REMOVE:
-      return;
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== action.id),
+      };
     default:
       return state;
   }
