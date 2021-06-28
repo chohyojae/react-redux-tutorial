@@ -9,19 +9,24 @@ const CounterContainer = ({ number, increase, decrease }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { number: state.counter.number };
-};
+// const mapStateToProps = (state) => {
+//   return { number: state.counter.number };
+// };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    increase: () => {
-      dispatch(increase());
-    },
-    decrease: () => {
-      dispatch(decrease());
-    },
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     increase: () => {
+//       dispatch(increase());
+//     },
+//     decrease: () => {
+//       dispatch(decrease());
+//     },
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CounterContainer);
+export default connect(
+  (state) => {
+    return { number: state.counter.number };
+  },
+  { increase, decrease },
+)(CounterContainer);
